@@ -56,6 +56,26 @@
     <audio data-key="76" src="sounds/tink.wav"></audio>
 
     <script>
+// take two: with transition end event
+let removeClass = event => {
+  console.log(event.target)
+  event.target.classList.remove("playing")
+}
+
+let playSound = event => {
+const audio = document.querySelector(`audio[data-key="${event.keyCode}"]`)
+const key = document.querySelector(`div[data-key="${event.keyCode}"]`)
+if(!audio) return;
+audio.play()
+key.classList.add("playing")
+}
+
+const key = Array.from(document.querySelectorAll(".key"))
+key.forEach(key => key.addEventListener("transitionend", removeClass))
+window.addEventListener("keydown", playSound)
+
+
+// take one
       const keys = document.querySelectorAll(".key");
       const audios = document.querySelectorAll("audio")
 
